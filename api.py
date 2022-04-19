@@ -20,7 +20,9 @@ class PetFriends:
             'password': passwd,
         }
         res = requests.get(self.base_url+'api/key', headers=headers)
+        print('\n RES =>', res)
         status = res.status_code
+        print('\n STATUS =>', status)
         result = ""
         try:
             result = res.json()

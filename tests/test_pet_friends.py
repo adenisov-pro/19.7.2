@@ -9,12 +9,17 @@ pf = PetFriends()
 def test_get_api_key_for_valid_user(email=valid_email, password=valid_password):
     """ Проверяем что запрос api ключа возвращает статус 200 и в результате содержится слово key"""
 
-    # Отправляем запрос и сохраняем полученный ответ с кодом статуса в status, а текст ответа в result
-    status, result = pf.get_api_key(email, password)
+    # Отправка запроса
+    response = pf.get_api_key(email, password)
+    print('\n\n RESPONSE =>', response)
 
-    # Сверяем полученные данные с нашими ожиданиями
-    assert status == 200
-    assert 'key' in result
+    # Получение данных
+    response_status = response[0]
+    response_body = response[1]
+
+    # Тестровые проверки
+    assert response_status == 200
+    assert 'key' in response_body
 
 
 def test_get_all_pets_with_valid_key(filter=''):

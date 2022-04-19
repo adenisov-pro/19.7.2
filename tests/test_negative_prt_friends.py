@@ -2,11 +2,14 @@
 from api import PetFriends
 from settings import valid_email, valid_password, failed_email, failed_password, without_email, without_password
 import os
+import requests
+import json
 
 pf = PetFriends()
 
 def test_get_api_key_without_email(email=without_email, password=valid_password):
     """ Проверяем возможность входа на сайт без email"""
+    """ Проверяем возможность входа на сайт без пароля"""
 
     status, result = pf.get_api_key(email, password)
 
