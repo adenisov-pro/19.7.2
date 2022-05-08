@@ -24,8 +24,8 @@ print(True if is_triangle(a, b, c) else False)
 
 
 @pytest.mark.parametrize("a", [-1, 0, 1, 3], ids=["negative", "zero", "positive_not_triangle", "positive"])
-@pytest.mark.parametrize("b", [-1, 0, 4, 4], ids=["negative", "zero", "positive_not_triangle", "positive"])
-@pytest.mark.parametrize("c", [-1, 0, 5, 5], ids=["negative", "zero", "positive_not_triangle", "positive"])
+@pytest.mark.parametrize("b", [-1, 0, 4, 4], ids=["5 digit", "6 digit", "7 digit", "8 digit"])
+@pytest.mark.parametrize("c", [-1, 0, 5, 5], ids=["9 digit", "10 digit", "11 digit", "12 digit"])
 def test_is_triangl(a, b, c):
    print(True if is_triangle(a, b, c) else False)
    assert True

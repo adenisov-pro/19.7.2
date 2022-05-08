@@ -2,6 +2,7 @@
 from api import PetFriends
 from settings import valid_email, valid_password
 import os
+import pytest
 
 pf = PetFriends()
 
@@ -126,7 +127,6 @@ def test_add_photo_pet(pet_photo='images/IMG-20190913-WA0019.jpg'):
 
     # Сверяем полученный ответ с ожидаемым результатом
     assert status == 200
-
 
 
 

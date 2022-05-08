@@ -2,16 +2,9 @@ from api import PetFriends
 from settings import valid_email, valid_password
 import os
 import pytest
-from datetime import datetime
 
 pf = PetFriends()
 
-@pytest.fixture(autouse=True)
-def time_delta():
-    start_time = datetime.now()
-    yield
-    end_time = datetime.now()
-    print(f"\nТест шел: {end_time - start_time}")
 
 def generate_string(num):
    return "x" * num
@@ -69,3 +62,19 @@ def test_get_all_pets_with_negative_filter(filter):
    # Проверяем статус ответа
    assert pytest.status == 500 # должен стоять статус 400
 
+
+
+@pytest.mark.parametrize("name", [''], ids=['empty'])
+@pytest.mark.parametrize("animal_type", [''], ids=['empty'])
+@pytest.mark.parametrize("age",
+                        ['', '-1', '0', '100', '1.5', '2147483647', '2147483648', special_chars(), russian_chars(),
+                         russian_chars().upper(), chinese_chars()]
+   , ids=['empty', 'negative', 'zero', 'greater than max', 'float', 'int_max', 'int_max + 1', 'specials',
+          'russian', 'RUSSIAN', 'chinese'])
+def test_add_new_pet_simple_negative(name, animal_type, age):
+
+   # Добавляем питомца
+   pytest.status, result = pf.add_new_pet_simple(pytest.key, name, animal_type, age)
+
+   # Сверяем полученный ответ с ожидаемым результатом
+   assert pytest.status == 400
