@@ -14,7 +14,7 @@ def test_get_api_key_without_email(email=without_email, password=valid_password)
     status, result = pf.get_api_key(email, password)
 
     # Сверяем полученные данные с нашими ожиданиями
-    assert status == 200
+    assert status == 401
     assert 'key' in result
 
 def test_get_api_key_without_password(email=valid_email, password=without_password):
@@ -23,7 +23,7 @@ def test_get_api_key_without_password(email=valid_email, password=without_passwo
     status, result = pf.get_api_key(email, password)
 
     # Сверяем полученные данные с нашими ожиданиями
-    assert status == 200
+    assert status == 401
     assert 'key' in result
 
 def test_get_api_key_without_email_and_password(email=without_email, password=without_password):
@@ -32,7 +32,7 @@ def test_get_api_key_without_email_and_password(email=without_email, password=wi
     status, result = pf.get_api_key(email, password)
 
     # Сверяем полученные данные с нашими ожиданиями
-    assert status == 200
+    assert status == 403
     assert 'key' in result
 
 def test_get_api_key_for_failed_user(email=failed_email, password=failed_password):
@@ -41,7 +41,7 @@ def test_get_api_key_for_failed_user(email=failed_email, password=failed_passwor
     status, result = pf.get_api_key(email, password)
 
     # Сверяем полученные данные с нашими ожиданиями
-    assert status == 200
+    assert status == 403
     assert 'key' in result
 
 def test_add_new_pet_without_name(name='', animal_type='ёжик',
@@ -127,7 +127,7 @@ def test_add_new_pet_failed_animal_type(name='Полкан', animal_type='@@@65%
     status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
     # Сверяем полученный ответ с ожидаемым результатом
-    assert status == 200
+    assert status == 400
     assert result['name'] == name
 
 def test_add_new_pet_without_age(name='Слон', animal_type='ёжик',
