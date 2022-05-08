@@ -41,8 +41,6 @@ def get_api_key():
    assert 'key' in pytest.key
 
    yield
-   # Проверяем что статус ответа = 200 и имя питомца соответствует заданному
-   assert pytest.status == 500 # должен стоять статус 400
 
 
 @pytest.mark.parametrize("filter",
@@ -69,6 +67,5 @@ def test_get_all_pets_with_negative_filter(filter):
    pytest.status, result = pf.get_list_of_pets(pytest.key, filter)
 
    # Проверяем статус ответа
-   assert pytest.status == 500 # должен стоять статус 200
-
+   assert pytest.status == 500 # должен стоять статус 400
 
